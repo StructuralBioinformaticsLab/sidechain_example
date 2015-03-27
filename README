@@ -1,0 +1,23 @@
+A Program to Repack Protein Side-chains for Protein Docking Refinement Procedures
+Copyright (c) 2014, Structural Bioinformatics Laboratory, Boston University
+Author: Mohammad Moghadasi (mohamad@bu.edu) 
+
+Requirements:
+
+I. Install libmol library
+	instructions at https://github.com/StructuralBioinformaticsLab/libmol
+
+II. Obtain Charmm parameters
+	instructions:
+		1. curl http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/toppar_c36_aug14.tgz | tar xz
+		2. cp toppar/toph19.inp prms/pdbamino_new.rtf
+		3. cat toppar/param19.inp toppar/ace/acepar19.inp > prms/parm_new.prm
+
+III. build the program
+	instructions:
+		1. make
+
+IV. run the program
+	instructions:
+		1. do "./run.sh"
+		2. find the output file in "1dfj/" as 1dfj_mwis_repacked.pdb
