@@ -21,3 +21,28 @@ IV. run the program
 	instructions:
 		1. do "./run.sh"
 		2. find the output file in "1dfj/" as 1dfj_mwis_repacked.pdb
+
+
+Supplement - Example of protein preparation:
+You will need:
+	(1) https://github.com/Acpharis/protein_prep
+	(2) https://github.com/Acpharis/create_psf
+	(3) https://github.com/Acpharis/pdb_utils
+	(4) OpenBabel ( https://github.com/openbabel/openbabel )
+
+Step 1: Prepare the PDB
+	protein_prep/prepare.py 1dfj.pdb
+	This creates 1dfj_pnon.pdb
+
+Step 2: Create the PSF
+	create_psf/create_psf_dihe 1dfj_pnon.pdb prms/pdbamino_new.rtf 1dfj_pnon.psf
+	This creates 1dfj_pnon.psf
+
+Step 3: Extract the ligand (chain I of 1dfj)
+	pdb_utils/extract_chain 1dfj_pnon.pdb I > 1dfj_pnon_l.pdb
+
+Step 4: Create mol2 file
+	obabel 1dfj_pnon.pdb -O 1dfj_pnon.mol2
+
+Now you can run the program
+	./main 1dfj_pnon.pdb 1dfj_pnon.psf 1dfj_pnon.mol2 1dfj_pnon_l.pdb prms/atoms.0.0.6.prm.ms.3cap+0.5ace.Hr0rec prms/parm_new.prm prms/pdbamino_new.rtf prms/rotamer_lib.txt 1dfj_repacked.pdb
